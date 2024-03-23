@@ -1,0 +1,17 @@
+1- afficher la la liste des films , essayer de faire des action /
+2- creation d'un compte / tester l'erreurs/
+3- se connecter avec le compte que je viens de creer.
+4- ajouter un commentaire.
+5- essayer d'utiliser les fonctionaliter d'admin.
+6- se deconnecter.
+7- connexion avec compte admin : 
+	-compte1@example.com
+	-motdepasse1
+8- desactiver un film / activer un film.
+9- supprimer un commentaire.
+10- modifier le role d'un utilisateur.
+11- supprimer un compte.
+12- un film : 
+	nom : se7en
+	desc : William Somerset, un inspecteur de police vieillissant, taciturne et désabusé, est à sept jours de la retraite. Affecté aux homicides au sein d'une brigade criminelle dans une grande ville américaine non nommée, il attend avec impatience son départ.
+	img : importer.

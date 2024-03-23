@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Appli livres</title>
+
+    <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+
+    <script type="text/javascript">
+        function envoyer() {
+            
+            init_form()
+
+            $.ajax({
+                url : "enregistrer_livre",
+                method : "post",
+                data : {
+                    titre : $("#titre").val(),
+                    auteur : $("#auteur").val(),
+                    annee : $("#annee").val(),
+                },
+                dataType : "json",
+                success : function(data) {
+                    console.log("résultat = "+JSON.stringify(data))
+                    if (data.res) {
+                        $("#mess").html(data.mess)
+                        $("#mess").css("color","green")
+                    }
+                    else {
+                        $("#mess").html(data.mess)
+                        $("#mess").css("color","red")
+                        data.err.forEach(e => {
+                            console.log("err = "+JSON.stringify(e))
+                            $("#err_"+e.champ).html(e.err)
+                        });
+                    }
+                }
+            })
+        }
+
+        function init_form() {
+            $("#err_titre").html("")
+            $("#err_auteur").html("")
+            $("#err_annee").html("")
+            $("#mess").html("")
+        }
+
+        function afficherListe() {
+        $.ajax({
+		url : "recuperer_liste",
+		method : "get",
+		data : {
+		},
+        dataType : "json",
+        success : function(data) { // recevoire des donnees from le serveur
+	    console.log("résultat = "+JSON.stringify(data))
+        if (data.res) {
+                
+            var tableHtml = '<table><tr><th>Titre</th><th>Auteur</th><th>Année</th></tr>';
+                data.tab.forEach(function(element) {
+                    tableHtml += '<tr><td>' + element.titre + '</td><td>' + element.auteur + '</td><td>' + element.annee + '</td></tr>';
+                });
+                tableHtml += '</table>';
+                $("#liste-donnees").html(tableHtml);
+            
+            }else {
+            $("#mess").html("!! Erreur : ")
+            $("#mess").css("color","red")
+           
+           
+        }
+        }
+	})   
+        
+    }
+    </script>
+
+</head>
+
+<body>
+
+    <h1>Appli livres</h1>
+
+    <p>
+        Bienvenue dans l'application livres
+    </p>
+
+  
+        <table>
+            <tr>
+                <td>Titre : </td>
+                <td><input type="text" id="titre" value=""></td>
+                <td><span id="err_titre" style="color:red;"></span></td>
+            </tr>
+            <tr>
+                <td>Auteur : </td>
+                <td><input type="text" id="auteur" value=""></td>
+                <td><span id="err_auteur" style="color:red;"></span></td>
+            </tr>
+            <tr>
+                <td>Année : </td>
+                <td><input type="text" id="annee" value=""></td>
+                <td><span id="err_annee" style="color:red;"></span></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" value="Envoyer" onclick="envoyer()"></td>
+            </tr>
+        </table>
+
+        <br>
+
+        <div id="mess"></div>
+        <div id="mess"></div>
+        <button onclick="afficherListe()">Afficher la liste des données</button>
+        <div  id="liste-donnees"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+-connexion (jeton)
+-creer compte 90%
+-ajouter commentaire (connexion obligatoire)
+-desactiver film (connexion obligatoire + admin)
+-Deconnexion 
+-supprimer des profil 
++afficher les commenatire + les supprimer 
++completer la creation du compte.
++reactiver un film.
